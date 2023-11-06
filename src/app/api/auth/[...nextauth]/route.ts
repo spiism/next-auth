@@ -1,6 +1,5 @@
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
-
 const handler = NextAuth({
   providers: [
     CredentialsProvider({
@@ -16,8 +15,6 @@ const handler = NextAuth({
       },
       async authorize(credentials, req) {
         // Add logic here to look up the user from the credentials supplied
-        // const user = { id: "1", name: "J Smith", email: "jsmith@example.com" };
-
         const res = await fetch("http://localhost:3000/api/login", {
           method: "POST",
           headers: {
@@ -43,6 +40,16 @@ const handler = NextAuth({
       },
     }),
   ],
+  callbacks: {
+    async jwt({ token, user }) {
+      return { ...token, ...user };
+    },
+
+    async session({ session, token }) {
+      session.user = token as any;
+      return session;
+    },
+  },
 });
 
 export { handler as GET, handler as POST };
