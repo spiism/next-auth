@@ -1,8 +1,8 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Next.js Project with Authentication Example
 
 ## Getting Started
 
-First, run the development server:
+To start the development server, use one of the following commands:
 
 ```bash
 npm run dev
@@ -12,17 +12,34 @@ yarn dev
 pnpm dev
 # or
 bun dev
-```
 
 
-
-## test through Postman
-
-http://localhost:3000/api/user
-
-body:
+Testing with Postman
+Register User
+Endpoint: http://localhost:3000/api/user
+Method: POST
+Request Body:
+json
 {
-    "name":"test",
-    "email":"test@gmail.com",
-    "password":"123456"
+    "name": "test",
+    "email": "test@gmail.com",
+    "password": "123456"
 }
+
+
+Login
+Endpoint: http://localhost:3000/api/login
+Method: POST
+Request Body:
+json
+{
+    "username": "test@gmail.com",
+    "password": "123456"
+}
+
+
+GET API via Authenticated User
+Endpoint: http://localhost:3000/api/user/1
+Method: GET
+Headers:
+authorization: {JWT}
